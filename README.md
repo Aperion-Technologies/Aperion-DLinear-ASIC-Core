@@ -30,6 +30,3 @@ Verified Node: Physical design proven on Sky130 (130nm) with 100MHz timing closu
 - Phase 3: Pilot Tape-out on TSMC N7/N5 nodes.
 
 
-## Contact information:
-- License: Apache License 2.0 (Enterprise-ready).
-- Partnerships: "We are seeking design partners in HFT and Aerospace. For technical deep-dives or pitch deck access, contact us at hello@[yourdomain].ai."
