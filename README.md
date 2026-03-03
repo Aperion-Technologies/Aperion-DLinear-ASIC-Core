@@ -1,8 +1,10 @@
 # Aperion-DLinear-ASIC-Core
-
+![Architecture Diagram](ai_model/figures/arch_1.png)
 [ Build: Passing ]
 [ Timing: 100MHz @ 130nm ]
 [ License: Apache 2.0 ]
+
+![Architecture Diagram](ai_model/figures/arch_2.png)
 
 This repository contains an RTL implementation of the DLinear model optimized for extremely low latency environments. Unlike traditional AI accelerators, our architecture eliminates the instruction layer, turning the neural network into a physical flow circuit (Dataflow Circuit).
 
@@ -12,11 +14,14 @@ This repository contains an RTL implementation of the DLinear model optimized fo
 - Throughput: 1 prediction per clock cycle (Fully Pipelined).
 - Area (Est. 7nm): <0.02 mm² per core.
 - Verified Node: Physical design proven on Sky130 (130nm) with 100MHz timing closure (LVS/DRC Clean).
+![Architecture Diagram](ai_model/figures/Latency_Stack-up.png)
 
 ## Why DLinear-to-Silicon
 - Zero Software Overhead: No operating system, interrupts, or drivers on the critical path.
 - In-Flight Reconfiguration: Support for updating model weights via a dedicated Config Port without stopping calculations.
 - Scalability: Chisel's modular design allows hundreds of cores to be combined into a single Predictive Fabric.
+
+![Architecture Diagram](ai_model/figures/surfer_waves.png)
 
 When we first launched DLinear synthesis on the Sky130 process technology, we faced the classic problem of a "combinatorial explosion". The electrical signal did not have time to travel from the input bus to the final adder in one clock cycle (10ns). We have received a critical Setup Slack of -7.88ns.
 Here's how we optimized the architecture to achieve Timing PASS and stable 1.2GHz (target 7nm):
@@ -45,6 +50,8 @@ After fixing Setup Slack, we had Hold Violations (-1.95ns) (the signal was flyin
 Final Metric (PPA)
 Thanks to these changes, the 130nm design has become STA Clean (Setup/Hold Pass). This confirms that when migrating to 7nm (FinFET), where the gate delay is 15-20 times less, our architecture is guaranteed to overcome the 1.5GHz barrier.
 
+![Architecture Diagram](ai_model/figures/openlane_transistors_topology.png)
+
 ## Technical Stack
 - Hardware: Chisel 6.0 (Scala), SystemVerilog.
 - Simulation: Verilator (C++ models), Cocotb (Python verification).
@@ -54,6 +61,7 @@ Thanks to these changes, the 130nm design has become STA Clean (Setup/Hold Pass)
 ## Roadmap
 - Phase 1 (Current): Single-core DLinear validation on Open-Source EDA.
 - Phase 2: Multi-core "Predictive NIC" architecture & AXI-Stream integration.
+![Architecture Diagram](ai_model/figures/Multi-Core_Fabric.png)
 - Phase 3: Pilot Tape-out on TSMC N7/N5 nodes.
 
 
