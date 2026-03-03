@@ -8,10 +8,10 @@ This repository contains an RTL implementation of the DLinear model optimized fo
 
 ## Key Performance Metrics (PPA)
 
-Latency: 3.3ns - 4.2ns (Deterministic, 4 clock cycles @ 1.2GHz).
-Throughput: 1 prediction per clock cycle (Fully Pipelined).
-Area (Est. 7nm): <0.02 mm² per core.
-Verified Node: Physical design proven on Sky130 (130nm) with 100MHz timing closure (LVS/DRC Clean).
+- Latency: 3.3ns - 4.2ns (Deterministic, 4 clock cycles @ 1.2GHz).
+- Throughput: 1 prediction per clock cycle (Fully Pipelined).
+- Area (Est. 7nm): <0.02 mm² per core.
+- Verified Node: Physical design proven on Sky130 (130nm) with 100MHz timing closure (LVS/DRC Clean).
 
 ## Why DLinear-to-Silicon
 - Zero Software Overhead: No operating system, interrupts, or drivers on the critical path.
