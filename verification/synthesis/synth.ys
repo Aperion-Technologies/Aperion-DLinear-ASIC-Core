@@ -1,0 +1,88 @@
+# verification/synthesis/synth.ys
+# Yosys synthesis script for DLinear ASIC
+#
+# This script synthesizes the RTL to a gate-level netlist
+# for gate-level simulation and timing analysis.
+#
+# Run with: yosys -s synth.ys
+#
+# Outputs:
+#   - dlinear_synth.v    : Gate-level Verilog netlist
+#   - dlinear_synth.json : Design statistics
+#   - dlinear.sdf        : Timing annotation (if using liberty)
+
+# =============================================================================
+# Read RTL
+# =============================================================================
+
+# Read SystemVerilog source
+read_verilog -sv ../../hardware/generated/DLinearTop.sv
+
+# =============================================================================
+# Elaborate and check
+# =============================================================================
+
+# Elaborate the design
+hierarchy -check -top DLinearTop
+
+# Run basic checks
+check -assert
+
+# =============================================================================
+# High-level synthesis
+# =============================================================================
+
+# Convert processes to netlists
+proc
+
+# Flatten hierarchy for analysis (optional, comment out to keep hierarchy)
+# flatten
+
+# Optimize
+opt -full
+
+# =============================================================================
+# Technology mapping
+# =============================================================================
+
+# Option 1: Generic gate-level (for simulation without liberty file)
+# This maps to generic gates (AND, OR, NOT, DFF, etc.)
+techmap
+
+# Map flip-flops
+dfflibmap -liberty cells_sim.lib
+
+# Map combinational logic
+abc -liberty cells_sim.lib
+
+# Option 2: Target-specific (uncomment if you have a liberty file)
+# Example for Sky130:
+# read_liberty -lib /path/to/sky130_fd_sc_hd__tt_025C_1v80.lib
+# dfflibmap -liberty /path/to/sky130_fd_sc_hd__tt_025C_1v80.lib
+# abc -liberty /path/to/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+# =============================================================================
+# Post-synthesis optimization
+# =============================================================================
+
+# Clean up
+opt_clean -purge
+
+# Final check
+check
+
+# =============================================================================
+# Output
+# =============================================================================
+
+# Write gate-level Verilog
+write_verilog -noattr -noexpr dlinear_synth.v
+
+# Write design statistics
+tee -o dlinear_stats.txt stat
+
+# Write JSON for visualization
+write_json dlinear_synth.json
+
+# Print summary
+stat

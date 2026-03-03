@@ -1,0 +1,106 @@
+// verification/surfer_config.ron
+// Surfer waveform viewer configuration for DLinear ASIC
+// Opens with organized signal groups for pipeline analysis
+
+(
+    // Window layout
+    window: (
+        width: 1400,
+        height: 900,
+    ),
+
+    // Signal groups for hierarchical view
+    groups: [
+        (
+            name: "Clock & Control",
+            expanded: true,
+            signals: [
+                "TOP.DLinearTop.clock",
+                "TOP.DLinearTop.reset",
+                "TOP.DLinearTop.io_configMode",
+                "TOP.DLinearTop.io_dataValid",
+            ],
+        ),
+        (
+            name: "Input Interface",
+            expanded: true,
+            signals: [
+                "TOP.DLinearTop.io_dataIn",
+                "TOP.DLinearTop.io_config_addr",
+                "TOP.DLinearTop.io_config_data",
+                "TOP.DLinearTop.io_config_writeEn",
+                "TOP.DLinearTop.io_config_weightSel",
+            ],
+        ),
+        (
+            name: "Decomposition (Stage 1)",
+            expanded: true,
+            signals: [
+                "TOP.DLinearTop.decomp.io_in",
+                "TOP.DLinearTop.decomp.io_valid",
+                "TOP.DLinearTop.decomp.io_trend",
+                "TOP.DLinearTop.decomp.io_seasonal",
+                "TOP.DLinearTop.decomp.io_ready",
+            ],
+        ),
+        (
+            name: "Trend MAC (Stage 2-3)",
+            expanded: false,
+            signals: [
+                "TOP.DLinearTop.trendMAC.io_valid",
+                "TOP.DLinearTop.trendMAC.io_result",
+                "TOP.DLinearTop.trendMAC.io_resultValid",
+            ],
+        ),
+        (
+            name: "Seasonal MAC (Stage 2-3)",
+            expanded: false,
+            signals: [
+                "TOP.DLinearTop.seasMAC.io_valid",
+                "TOP.DLinearTop.seasMAC.io_result",
+                "TOP.DLinearTop.seasMAC.io_resultValid",
+            ],
+        ),
+        (
+            name: "Output (Stage 4)",
+            expanded: true,
+            signals: [
+                "TOP.DLinearTop.io_predOut",
+                "TOP.DLinearTop.io_predValid",
+                "TOP.DLinearTop.io_status_ready",
+                "TOP.DLinearTop.io_status_weightsLoaded",
+            ],
+        ),
+        (
+            name: "Pipeline Status",
+            expanded: true,
+            signals: [
+                "TOP.DLinearTop.windowFillCount",
+                "TOP.DLinearTop.windowFilled",
+            ],
+        ),
+    ],
+
+    // Time markers for latency measurement
+    markers: [
+        (
+            name: "Input Valid",
+            color: "#00FF00",
+        ),
+        (
+            name: "Output Valid",
+            color: "#FF0000",
+        ),
+        (
+            name: "Latency",
+            color: "#0000FF",
+        ),
+    ],
+
+    // Display settings
+    display: (
+        radix: "signed_decimal",
+        show_hierarchy: true,
+        zoom_fit_on_load: true,
+    ),
+)

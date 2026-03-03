@@ -1,0 +1,5 @@
+mean: 110.81843028119224
+std: 24.063585135531927
+rescale_factor: 0.25
+window_size: 64
+num_samples: 499936

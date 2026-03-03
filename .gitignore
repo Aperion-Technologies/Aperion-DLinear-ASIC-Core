@@ -1,0 +1,40 @@
+.worktrees/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# AI Model outputs (generated)
+ai_model/outputs/
+ai_model/data/ticks.*
+
+# Scala/SBT
+target/
+project/target/
+project/project/
+*.class
+*.log
+
+# Hardware test outputs
+hardware/test_run_dir/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Synthesis (OpenLane)
+synthesis/OpenLane/
+synthesis/*.gds
+synthesis/*.sdf
+synthesis/*.spef
+synthesis/DLinearTop_synth.v
