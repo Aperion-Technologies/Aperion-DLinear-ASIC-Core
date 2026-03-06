@@ -1,12 +1,4 @@
-# DLinear ASIC OpenLane Design Structure
-
-```
-synthesis/OpenLane/designs/dlinear_asic/
-├── src/
-│   └── DLinearTop.sv    # Chisel-generated SystemVerilog (2313 lines)
-├── config.json          # OpenLane configuration
-└── runs/                # Synthesis output (generated)
-```
+# OpenLane Design Structure
 
 ## Design Statistics
 - Module: DLinearTop
